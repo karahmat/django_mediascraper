@@ -1,0 +1,37 @@
+{% extends '../base.html' %}
+{% load static %}
+{% block content %}
+
+<div class='container mt-3'>
+    <h1>News Scraper</h1>
+    <p>Key in your keyword in Bahasa Indonesia and English (for Jakarta Post)</p>
+
+    <form action="/" method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}  
+        <div class='form-group mb-2'>
+            {{ form.search_indonesian.errors }}
+            <label for="{{ form.search_indonesian.id_for_label }}">Search (Indonesian):</label>
+            {{ form.search_indonesian }}
+        </div>
+    
+        <div class='form-group mb-2'>
+            {{ form.search_english.errors }}
+            <label for="{{ form.search_english.id_for_label }}">Search (English):</label>
+            {{ form.search_english }}
+        </div>
+        
+        <button id="submitBtn" class="btn btn-primary" type="submit" value="Submit">Submit</button>
+        
+        
+    </form>
+
+    <div id="message" class="mt-2 mb-2 d-none">You can either wait or go to {{ request.scheme }}://{{ request.get_host }}/result/{{ request.user.id }} in about 5 minutes.</div>
+    <div id="progressBar" class="progress d-none" style="height: 20px;">
+        <div class="progress-bar d-none" role="progressbar" style="width: 1%;"></div>
+    </div>
+    
+</div>
+<script src="{% static 'scrape.js' %}" type="text/javascript"></script>
+
+{% endblock %}

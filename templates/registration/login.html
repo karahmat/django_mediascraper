@@ -1,0 +1,18 @@
+{% extends '../base.html' %}
+{% block content %}
+<div class='container mt-3'>
+    <h2>Login Page</h2>
+    <form method="POST" action="{% url 'account:login' %}">
+        <div class='form-group mb-2'>            
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% if request.GET.next %}
+            <input type='hidden' name='next' value={{ request.GET.next }} />
+        {% endif %}
+        </div>
+    <div>
+        <button id="loginBtn" class="btn btn-primary" type="submit" value="Login">Login</button>
+    </div>
+    </form>
+</div>
+{% endblock %}
