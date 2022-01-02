@@ -1,5 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
+from dotenv import load_dotenv
+import os
+load_dotenv(os.path.join(os.path.dirname(__file__), '..', '..', 'aggrenews_project', '.env'))
 
 class Kompas:
     def __init__(self):
@@ -12,7 +15,7 @@ class Kompas:
         self.imgSrc = []
 
     def scrape_search(self, search):
-        Google_Developer_Key = 'AIzaSyAM3N9rGEjXcxhueHO0fhhzpXYqHBx6XAU'
+        Google_Developer_Key = os.getenv('GOOGLE_DEV_KEY')
         Kompas_cx = '018212539862037696382:-xa61bkyvao'        
         response = requests.get("https://www.googleapis.com/customsearch/v1?key=" + Google_Developer_Key + "&cx=" + Kompas_cx + "&q=" + search + "&sort=date") 
         response.raise_for_status()        
